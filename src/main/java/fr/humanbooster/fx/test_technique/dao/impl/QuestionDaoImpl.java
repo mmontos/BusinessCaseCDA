@@ -13,7 +13,10 @@ import fr.humanbooster.fx.test_technique.business.Niveau;
 import fr.humanbooster.fx.test_technique.business.Question;
 import fr.humanbooster.fx.test_technique.business.Questionnaire;
 import fr.humanbooster.fx.test_technique.dao.ConnexionBdd;
+import fr.humanbooster.fx.test_technique.dao.DomaineDao;
+import fr.humanbooster.fx.test_technique.dao.NiveauDao;
 import fr.humanbooster.fx.test_technique.dao.QuestionDao;
+import fr.humanbooster.fx.test_technique.dao.QuestionnaireDao;
 import fr.humanbooster.fx.test_technique.dao.Requetes;
 
 public class QuestionDaoImpl implements QuestionDao {
@@ -22,9 +25,9 @@ public class QuestionDaoImpl implements QuestionDao {
 	private DomaineDao domaineDao;
 	private QuestionnaireDao questionnaireDao;
 	private AdministrateurDao administrateurDao;
-	
+
 	private Connection connexion;
-	
+
 	public QuestionDaoImpl() {
 		try {
 			connexion = ConnexionBdd.getConnection();
@@ -40,7 +43,7 @@ public class QuestionDaoImpl implements QuestionDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public Question create(Question question) throws SQLException {
 		PreparedStatement ps = connexion.prepareStatement(Requetes.AJOUT_QUESTION, Statement.RETURN_GENERATED_KEYS);
@@ -72,23 +75,23 @@ public class QuestionDaoImpl implements QuestionDao {
 			question.setLienMedia(rs.getString("lienMedia"));
 			question.setEstChoixMultiples(rs.getBoolean("estChoixMultiples"));
 			question.setEstElminatoire(rs.getBoolean("estEliminatoire"));
-			
+
 			Long idNiveau = rs.getLong("idNIVEAU");
 			Niveau niveau = niveauDao.findOne(idNiveau);
 			question.setNiveau(niveau);
-			
+
 			Long idDomaine = rs.getLong("idDOMAINE");
 			Domaine domaine = domaineDao.findOne(idDomaine);
 			question.setDomaine(domaine);
-			
+
 			Long idQuestionnaire = rs.getLong("idQUESTIONNAIRE");
 			Questionnaire questionnaire = questionnaireDao.findOne(idQuestionnaire);
 			question.setQuestionnaire(questionnaire);
-			
+
 			Long idAdministrateur = rs.getLong("idADMINISTRATEUR");
 			Administrateur administrateur = administrateurDao.findOne(idAdministrateur);
 			question.setAdministrateur(administrateur);
-			
+
 		}
 		return question;
 	}
