@@ -19,6 +19,13 @@ public class Requetes {
 	public static final String TOUS_LES_STAGIAIRES = "SELECT id, dateNaissance, numPoleEmploi, estHandicape FROM stagiaire";
 	public static final String SUPPRESSION_STAGIAIRE = "DELETE FROM stagiaire WHERE id=?";
 
+	// DOMAINE
+	public static final String AJOUT_DOMAINE = "INSERT INTO domaine (nom) VALUES (?)";
+	public static final String DOMAINE_PAR_ID = "SELECT idDOMAINE, nom FROM domaine WHERE idDOMAINE=?";
+	public static final String TOUS_LES_DOMAINES = "SELECT idDOMAINE, nom FROM domaine";
+	public static final String UPDATE_DOMAINE_PAR_NOM = "UPDATE domaine SET nom=? WHERE idDOMAINE=?";
+	public static final String SUPPRESSION_DOMAINE = "DELETE FROM domaine WHERE idDOMAINE=?";
+
 	public static final String AJOUT_CHEF_PROJET = null;
 
 }
