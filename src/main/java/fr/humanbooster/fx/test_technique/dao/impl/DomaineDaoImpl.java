@@ -53,7 +53,7 @@ public class DomaineDaoImpl implements DomaineDao {
 	// public static final String UPDATE_DOMAINE_PAR_NOM = "UPDATE domaine SET nom=?
 	// WHERE idDOMAINE=?";
 	public Domaine update(Domaine domaine) throws SQLException {
-		PreparedStatement ps = connexion.prepareStatement(Requetes.UPDATE_UTILISATEUR_MOT_DE_PASSE);
+		PreparedStatement ps = connexion.prepareStatement(Requetes.UPDATE_DOMAINE_PAR_NOM);
 		ps.setString(1, domaine.getNom());
 		ps.executeUpdate();
 		return findOne(domaine.getIdDomaine());
