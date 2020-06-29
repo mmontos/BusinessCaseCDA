@@ -13,8 +13,6 @@ public interface QuestionnaireService {
 
 	List<Questionnaire> recupererQuestionnaires() throws SQLException;
 
-	Questionnaire majQuestionnaire(Questionnaire questionnaire) throws SQLException;
-
 	boolean supprimerQuestionnaire(Long id) throws SQLException;
 
 }

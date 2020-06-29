@@ -12,6 +12,7 @@ import fr.humanbooster.fx.test_technique.business.Domaine;
 import fr.humanbooster.fx.test_technique.business.Niveau;
 import fr.humanbooster.fx.test_technique.business.Question;
 import fr.humanbooster.fx.test_technique.business.Questionnaire;
+import fr.humanbooster.fx.test_technique.dao.AdministrateurDao;
 import fr.humanbooster.fx.test_technique.dao.ConnexionBdd;
 import fr.humanbooster.fx.test_technique.dao.DomaineDao;
 import fr.humanbooster.fx.test_technique.dao.NiveauDao;
