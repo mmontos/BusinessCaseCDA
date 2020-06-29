@@ -52,5 +52,6 @@ public class Requetes {
     public static final String QUESTIONS_PAR_QUESTIONNAIRE = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idDOMAINE, idNIVEAU FROM question WHERE idQUESTIONNAIRE=?";
     public static final String QUESTIONS_PAR_NIVEAU = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE FROM question WHERE idNIVEAU=?";
     public static final String UPDATE_QUESTION = "UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?, estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?, idNIVEAU=? WHERE idQUESTION=?";
-
+    public static final String SUPPRESSION_QUESTION = "DELETE FROM question WHERE idQUESTION=?";
+    
 }
