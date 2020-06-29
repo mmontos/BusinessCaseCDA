@@ -13,8 +13,6 @@ public interface QuestionnaireDao {
 
 	List<Questionnaire> findAll() throws SQLException;
 
-	Questionnaire update(Questionnaire questionnaire) throws SQLException;
-
 	boolean delete(Long idNiveau) throws SQLException;
 
 }

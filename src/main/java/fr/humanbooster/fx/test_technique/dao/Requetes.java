@@ -38,4 +38,10 @@ public class Requetes {
 	public static final String MODIFICATION_NIVEAU = "UPDATE Niveau SET nom=? WHERE idNIVEAU=?";
 	public static final String SUPPRESSION_NIVEAU = "DELETE FROM Niveau WHERE idNIVEAU=?";
 
+	// QUESTIONNAIRE
+	public static final String AJOUT_QUESTIONNAIRE = "INSERT INTO questionnaire () VALUES ()";
+	public static final String TOUS_LES_QUESTIONNAIRES = "SELECT idQUESTIONNAIRE FROM questionnaire";
+	public static final String QUESTIONNAIRE_PAR_ID = "SELECT idNIVEAU FROM questionnaire WHERE idQUESTIONNAIRE=?";
+	public static final String SUPPRESSION_QUESTIONNAIRE = "DELETE FROM questionnaire WHERE idQUESTIONNAIRE=?";
+
 }
