@@ -1,4 +1,4 @@
-package fr.humanbooster.fx.test_technique.dao;
+package fr.humanbooster.fx.test_technique.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.humanbooster.fx.test_technique.business.Utilisateur;
+import fr.humanbooster.fx.test_technique.dao.UtilisateurDao;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
