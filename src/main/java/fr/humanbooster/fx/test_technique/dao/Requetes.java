@@ -53,7 +53,7 @@ public class Requetes {
 	public static final String QUESTION_PAR_idQUESTIONNAIRE = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE, idNIVEAU FROM question WHERE idQUESTIONNAIRE=?";
 	public static final String QUESTION_PAR_idDOMAINE = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE, idNIVEAU FROM question WHERE idDOMAINE=?";
 	public static final String QUESTION_PAR_idNIVEAU = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE, idNIVEAU FROM question WHERE idNIVEAU=?";
-	public static final String UPDATE_QUESTION_PAR_NOM = "UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?, estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?, idNIVEAU=? WHERE idQUESTION=?";
+	public static final String UPDATE_QUESTION = "UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?, estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?, idNIVEAU=? WHERE idQUESTION=?";
 	public static final String SUPPRESSION_QUESTION = "DELETE FROM question WHERE idQUESTION=?";
 
 }
