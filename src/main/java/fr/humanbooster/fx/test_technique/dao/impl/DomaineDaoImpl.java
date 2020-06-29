@@ -2,11 +2,13 @@ package fr.humanbooster.fx.test_technique.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.humanbooster.fx.test_technique.business.Domaine;
-import fr.humanbooster.fx.test_technique.business.Stagiaire;
 import fr.humanbooster.fx.test_technique.dao.ConnexionBdd;
 import fr.humanbooster.fx.test_technique.dao.DomaineDao;
 import fr.humanbooster.fx.test_technique.dao.Requetes;
@@ -29,24 +31,43 @@ public class DomaineDaoImpl implements DomaineDao {
 	// public static final String AJOUT_DOMAINE = "INSERT INTO domaine (nom) VALUES
 	// (?)";
 	public Domaine create(Domaine domaine) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement ps = connexion.prepareStatement(Requetes.AJOUT_DOMAINE, Statement.RETURN_GENERATED_KEYS);
+		ps.setString(1, domaine.getNom());
+		ps.executeUpdate();
+		ResultSet rs = ps.getGeneratedKeys();
+		rs.next();
+		domaine.setIdDomaine(rs.getLong(1));
+		return domaine;
 	}
 
 	@Override
 	// public static final String DOMAINE_PAR_ID = "SELECT idDOMAINE, nom FROM
 	// domaine WHERE idDOMAINE=?";
 	public Domaine findOne(Long id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Domaine domaine = null;
+		PreparedStatement ps = connexion.prepareStatement(Requetes.DOMAINE_PAR_ID);
+		ps.setLong(1, id);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			domaine = new Domaine(rs.getString("nom"));
+			domaine.setIdDomaine(rs.getLong("idDOMAINE"));
+		}
+		return domaine;
 	}
 
 	@Override
 	// public static final String TOUS_LES_DOMAINES = "SELECT idDOMAINE, nom FROM
 	// domaine";
 	public List<Domaine> findAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Domaine> domaines = new ArrayList<>();
+		PreparedStatement ps = connexion.prepareStatement(Requetes.TOUS_LES_DOMAINES);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Domaine domaine = new Domaine(rs.getString("nom"));
+			domaine.setIdDomaine(rs.getLong("idDOMAINE"));
+			domaines.add(domaine);
+		}
+		return domaines;
 	}
 
 	@Override
