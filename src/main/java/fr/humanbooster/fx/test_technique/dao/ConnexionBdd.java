@@ -15,5 +15,7 @@ public class ConnexionBdd {
 
 	public static void close() throws SQLException, ClassNotFoundException {
 		getConnection().close();
+		
+		//Hello !!!!
 	}
 }
