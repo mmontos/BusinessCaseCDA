@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.humanbooster.fx.test_technique.business.Administrateur;
@@ -105,32 +106,72 @@ public class QuestionDaoImpl implements QuestionDao {
 
 	@Override
 	public List<Question> findByQuestionnaire(Questionnaire questionnaire) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Question> questions = new ArrayList<>();
+		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTION_PAR_idQUESTIONNAIRE);
+		ps.setLong(1, questionnaire.getIdQuestionnaire());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			questions.add(findOne(rs.getLong("idQUESTION")));
+		}
+		return questions;
 	}
 
 	@Override
 	public List<Question> findByDomaine(Domaine domaine) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Question> questions = new ArrayList<>();
+		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTION_PAR_idDOMAINE);
+		ps.setLong(1, domaine.getIdDomaine());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			questions.add(findOne(rs.getLong("idQUESTION")));
+		}
+		return questions;
 	}
 
 	@Override
 	public List<Question> findByNiveau(Niveau niveau) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Question> questions = new ArrayList<>();
+		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTION_PAR_idNIVEAU);
+		ps.setLong(1, niveau.getIdNiveau());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			questions.add(findOne(rs.getLong("idQUESTION")));
+		}
+		return questions;
 	}
 
+	// UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?,
+	// estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?,
+	// idNIVEAU=? WHERE idQUESTION=?
 	@Override
 	public Question update(Question question) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement ps = connexion.prepareStatement(Requetes.UPDATE_QUESTION);
+		ps.setString(1, question.getEnonce());
+		ps.setString(2, question.getLienMedia());
+		ps.setBoolean(3, question.isEstChoixMultiples());
+		ps.setBoolean(4, question.isEstElminatoire());
+		ps.setLong(5, question.getAdministrateur().getIdUtilisateur());
+		ps.setLong(6, question.getQuestionnaire().getIdQuestionnaire());
+		ps.setLong(7, question.getDomaine().getIdDomaine());
+		ps.setLong(8, question.getNiveau().getIdNiveau());
+
+		ps.setLong(9, question.getIdQuestion());
+
+		ps.executeUpdate();
+		return findOne(question.getIdQuestion());
 	}
 
 	@Override
 	public boolean delete(Long id) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		Question question = findOne(id);
+		boolean estEfface = false;
+		if (question != null) {
+			PreparedStatement ps = connexion.prepareStatement(Requetes.SUPPRESSION_QUESTION);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			estEfface = true;
+		}
+		return estEfface;
 	}
 
 }
