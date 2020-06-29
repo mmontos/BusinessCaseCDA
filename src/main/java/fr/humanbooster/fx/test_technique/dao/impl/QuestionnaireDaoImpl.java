@@ -30,8 +30,7 @@ public class QuestionnaireDaoImpl implements QuestionnaireDao {
 	}
 
 	@Override
-	// public static final String AJOUT_QUESTIONNAIRE = "INSERT INTO questionnaire
-	// () VALUES ()";
+	// "INSERT INTO questionnaire () VALUES ()";
 	public Questionnaire create(Questionnaire questionnaire) throws SQLException {
 		PreparedStatement ps = connexion.prepareStatement(Requetes.AJOUT_QUESTIONNAIRE,
 				Statement.RETURN_GENERATED_KEYS);
@@ -43,15 +42,14 @@ public class QuestionnaireDaoImpl implements QuestionnaireDao {
 	}
 
 	@Override
-	// public static final String QUESTIONNAIRE_PAR_ID = "SELECT idNIVEAU FROM
-	// questionnaire WHERE idQUESTIONNAIRE=?";
+	// SELECT idNIVEAU FROM questionnaire WHERE idQUESTIONNAIRE=?";
 	public Questionnaire findOne(Long id) throws SQLException {
 		Questionnaire questionnaire = null;
 		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTIONNAIRE_PAR_ID);
 		ps.setLong(1, id);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
-			questionnaire = new Questionnaire(rs.getLong("idDOMAINE"));
+			questionnaire = new Questionnaire(rs.getLong("idQUESTIONNAIRE"));
 		}
 		return questionnaire;
 	}
