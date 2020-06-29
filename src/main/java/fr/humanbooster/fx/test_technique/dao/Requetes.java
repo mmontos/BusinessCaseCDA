@@ -31,4 +31,11 @@ public class Requetes {
 	public static final String UPDATE_DOMAINE_PAR_NOM = "UPDATE domaine SET nom=? WHERE idDOMAINE=?";
 	public static final String SUPPRESSION_DOMAINE = "DELETE FROM domaine WHERE idDOMAINE=?";
 
+	// NIVEAU
+	public static final String AJOUT_NIVEAU = "INSERT INTO Niveau (nom) VALUES (?)";
+	public static final String TOUS_LES_NIVEAUX = "SELECT idNIVEAU, nom FROM Niveau";
+	public static final String NIVEAU_PAR_ID = "SELECT idNIVEAU, nom FROM Niveau WHERE idNIVEAU=?";
+	public static final String MODIFICATION_NIVEAU = "UPDATE Niveau SET nom=? WHERE idNIVEAU=?";
+	public static final String SUPPRESSION_NIVEAU = "DELETE FROM Niveau WHERE idNIVEAU=?";
+
 }
