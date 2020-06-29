@@ -13,32 +13,28 @@ import fr.humanbooster.fx.test_technique.dao.QuestionnaireDao;
 public class QuestionnaireDaoImpl implements QuestionnaireDao {
 
 	@Override
-	// public static final String AJOUT_QUESTIONNAIRE = "INSERT INTO questionnaire
-	// () VALUES ()";
+	// "INSERT INTO questionnaire () VALUES ()";
 	public Questionnaire create(Questionnaire questionnaire) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	// public static final String QUESTIONNAIRE_PAR_ID = "SELECT idNIVEAU FROM
-	// questionnaire WHERE idQUESTIONNAIRE=?";
+	// "SELECT idNIVEAU FROM questionnaire WHERE idQUESTIONNAIRE=?";
 	public Questionnaire findOne(Long id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	// public static final String TOUS_LES_QUESTIONNAIRES = "SELECT idQUESTIONNAIRE
-	// FROM questionnaire";
+	// "SELECT idQUESTIONNAIRE FROM questionnaire";
 	public List<Questionnaire> findAll() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	// public static final String SUPPRESSION_QUESTIONNAIRE = "DELETE FROM
-	// questionnaire WHERE idQUESTIONNAIRE=?";
+	// "DELETE FROM questionnaire WHERE idQUESTIONNAIRE=?";
 	public boolean delete(Long idNiveau) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;

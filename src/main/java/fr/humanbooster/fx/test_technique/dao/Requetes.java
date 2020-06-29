@@ -44,4 +44,11 @@ public class Requetes {
 	public static final String QUESTIONNAIRE_PAR_ID = "SELECT idNIVEAU FROM questionnaire WHERE idQUESTIONNAIRE=?";
 	public static final String SUPPRESSION_QUESTIONNAIRE = "DELETE FROM questionnaire WHERE idQUESTIONNAIRE=?";
 
+	// QUESTION
+	public static final String AJOUT_QUESTION = "INSERT INTO question (enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE, idNIVEAU) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String QUESTION_PAR_ID = "SELECT idQUESTION, nom FROM question WHERE idQUESTION=?";
+	public static final String TOUTES_LES_QUESTIONS = "SELECT idQUESTION, nom FROM question";
+	public static final String UPDATE_QUESTION_PAR_NOM = "UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?, estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?, idNIVEAU=? WHERE idQUESTION=?";
+	public static final String SUPPRESSION_QUESTION = "DELETE FROM question WHERE idQUESTION=?";
+
 }
