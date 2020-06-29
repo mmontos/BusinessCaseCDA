@@ -8,6 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.humanbooster.fx.test_technique.business.Niveau;
+import fr.humanbooster.fx.test_technique.dao.ConnexionBdd;
+import fr.humanbooster.fx.test_technique.dao.NiveauDao;
+import fr.humanbooster.fx.test_technique.dao.Requetes;
+
 public class NiveauDaoImpl implements NiveauDao {
 
 	private Connection connexion;
@@ -31,7 +36,7 @@ public class NiveauDaoImpl implements NiveauDao {
 		ps.executeUpdate();
 		ResultSet rs = ps.getGeneratedKeys();
 		rs.next();
-		niveau.setId(rs.getLong(1));
+		niveau.setIdNiveau(rs.getLong(1));
 		return niveau;
 	}
 
@@ -43,7 +48,7 @@ public class NiveauDaoImpl implements NiveauDao {
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			niveau = new Niveau(rs.getString("nom"));
-			niveau.setId(rs.getLong("id"));
+			niveau.setIdNiveau(rs.getLong("id"));
 		}
 		return niveau;
 	}
@@ -55,7 +60,7 @@ public class NiveauDaoImpl implements NiveauDao {
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			Niveau niveau = new Niveau(rs.getString("nom"));
-			niveau.setId(rs.getLong("id"));
+			niveau.setIdNiveau(rs.getLong("id"));
 			niveaux.add(niveau);
 		}
 		return niveaux;
@@ -66,7 +71,7 @@ public class NiveauDaoImpl implements NiveauDao {
 		PreparedStatement ps = connexion.prepareStatement(Requetes.MODIFICATION_NIVEAU);
 		ps.setString(1, niveau.getNom());
 
-		ps.setLong(2, niveau.getId());
+		ps.setLong(2, niveau.getIdNiveau());
 		ps.executeUpdate();
 		return niveau;
 	}
