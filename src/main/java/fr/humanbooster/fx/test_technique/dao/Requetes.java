@@ -46,9 +46,11 @@ public class Requetes {
 
 	// QUESTION
 	public static final String AJOUT_QUESTION = "INSERT INTO question (enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE, idNIVEAU) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	public static final String QUESTION_PAR_ID = "SELECT idQUESTION, nom FROM question WHERE idQUESTION=?";
-	public static final String TOUTES_LES_QUESTIONS = "SELECT idQUESTION, nom FROM question";
-	public static final String UPDATE_QUESTION_PAR_NOM = "UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?, estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?, idNIVEAU=? WHERE idQUESTION=?";
-	public static final String SUPPRESSION_QUESTION = "DELETE FROM question WHERE idQUESTION=?";
+    public static final String QUESTION_PAR_ID = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE, idNIVEAU FROM question WHERE id=?";
+    public static final String QUESTIONS_PAR_QUESTIONNAIRE_ET_DOMAINE = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idNIVEAU FROM question WHERE idQUESTIONNAIRE=? AND idDOMAINE=?";
+    public static final String QUESTIONS_PAR_DOMAINE = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idNIVEAU FROM question WHERE idDOMAINE=?";
+    public static final String QUESTIONS_PAR_QUESTIONNAIRE = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idDOMAINE, idNIVEAU FROM question WHERE idQUESTIONNAIRE=?";
+    public static final String QUESTIONS_PAR_NIVEAU = "SELECT idQUESTION, enonce, lienMedia, estChoixMultiples, estEliminatoire, idUTILISATEUR, idQUESTIONNAIRE, idDOMAINE FROM question WHERE idNIVEAU=?";
+    public static final String UPDATE_QUESTION = "UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?, estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?, idNIVEAU=? WHERE idQUESTION=?";
 
 }
