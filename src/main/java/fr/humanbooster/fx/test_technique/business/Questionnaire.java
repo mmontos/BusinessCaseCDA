@@ -1,7 +1,11 @@
 package fr.humanbooster.fx.test_technique.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Questionnaire {
 	private Long idQuestionnaire;
+	private List<Question> questions = new ArrayList<>();
 
 	public Questionnaire() {
 	}
@@ -14,8 +18,16 @@ public class Questionnaire {
 		return idQuestionnaire;
 	}
 
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
 	public void setIdQuestionnaire(Long idQuestionnaire) {
 		this.idQuestionnaire = idQuestionnaire;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 
 	@Override
