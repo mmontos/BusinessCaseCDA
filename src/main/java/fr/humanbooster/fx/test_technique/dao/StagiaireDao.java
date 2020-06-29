@@ -13,6 +13,4 @@ public interface StagiaireDao {
 
 	List<Stagiaire> findAll() throws SQLException;
 
-	boolean delete(Long id) throws SQLException;
-
 }

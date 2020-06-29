@@ -10,18 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.humanbooster.fx.test_technique.business.Stagiaire;
-import fr.humanbooster.fx.test_technique.business.Utilisateur;
+import fr.humanbooster.fx.test_technique.dao.ConnexionBdd;
+import fr.humanbooster.fx.test_technique.dao.Requetes;
 import fr.humanbooster.fx.test_technique.dao.StagiaireDao;
 
 public class StagiaireDaoImpl implements StagiaireDao {
 
 	private Connection connexion;
-	private UtilisateurDao utilisateurDao;
 
 	public StagiaireDaoImpl() {
 		try {
 			connexion = ConnexionBdd.getConnection();
-			utilisateurDao = new UtilisateurDaoImpl();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -32,18 +31,27 @@ public class StagiaireDaoImpl implements StagiaireDao {
 	// "INSERT INTO stagiaire (dateNaissance, numPoleEmploi, estHandicape,
 	// idUtilisateur) VALUES (?, ?, ?, ?)";
 	public Stagiaire create(Stagiaire stagiaire) throws SQLException {
-		Utilisateur utilisateur = null;
-		utilisateur = utilisateurDao.create(utilisateur);
-		PreparedStatement ps = connexion.prepareStatement(Requetes.AJOUT_STAGIAIRE, Statement.RETURN_GENERATED_KEYS);
-		ps.setTimestamp(1, new Timestamp(stagiaire.getDateNaissance().getTime()));
-		ps.setString(2, stagiaire.getNumPoleEmploi());
-		ps.setBoolean(3, stagiaire.isEstHandicape());
-		ps.setLong(4, stagiaire.getIdUtilisateur());
-		ps.executeUpdate();
-		ResultSet rs = ps.getGeneratedKeys();
-		rs.next();
-		stagiaire.setIdUtilisateur(rs.getLong(1));
-		return stagiaire;
+		try {
+			PreparedStatement psUtilisateur = connexion.prepareStatement(Requetes.AJOUT_UTILISATEUR, Statement.RETURN_GENERATED_KEYS);
+			psUtilisateur.setString(1, stagiaire.getNom());
+			psUtilisateur.setString(2, stagiaire.getPrenom());
+			psUtilisateur.setString(3, stagiaire.getEmail());
+			psUtilisateur.setString(4, stagiaire.getMotDePasseSHA());
+			psUtilisateur.executeUpdate();
+			ResultSet rs = psUtilisateur.getGeneratedKeys();
+			rs.next();
+			stagiaire.setIdUtilisateur(rs.getLong(1));
+			PreparedStatement psStagiaire = connexion.prepareStatement(Requetes.AJOUT_STAGIAIRE);
+			psStagiaire.setTimestamp(1, new Timestamp(stagiaire.getDateNaissance().getTime()));
+			psStagiaire.setString(2, stagiaire.getNumPoleEmploi());
+			psStagiaire.setBoolean(3, stagiaire.getEstHandicape());
+			psStagiaire.setLong(4, stagiaire.getIdUtilisateur());
+			psStagiaire.executeUpdate();
+			return stagiaire;
+		} catch (Exception e) {
+			connexion.rollback();
+		}
+		return null;
 	}
 
 	// "SELECT id, dateNaissance, numPoleEmploi, estHandicape, lienJustifHAndicap
@@ -51,15 +59,24 @@ public class StagiaireDaoImpl implements StagiaireDao {
 	// estHandicape FROM stagiaire";
 	public Stagiaire findOne(Long id) throws SQLException {
 		Stagiaire stagiaire = null;
-		PreparedStatement ps = connexion.prepareStatement(Requetes.STAGIAIRE_PAR_ID);
-		ps.setLong(1, id);
-		ResultSet rs = ps.executeQuery();
-		if (rs.next()) {
+		PreparedStatement psUtilisateur = connexion.prepareStatement(Requetes.UTILISATEUR_PAR_ID);
+		psUtilisateur.setLong(1, id);
+		ResultSet rsUtilisateur = psUtilisateur.executeQuery();
+		if (rsUtilisateur.next()) {
 			stagiaire = new Stagiaire();
-			stagiaire.setIdUtilisateur(rs.getLong("id"));
-			stagiaire.setDateNaissance(rs.getTimestamp("dateDeNaissance"));
-			stagiaire.setNumPoleEmploi(rs.getString("numPolEmploi"));
-			stagiaire.setEstHandicape(rs.getBoolean("estHandicape"));
+			stagiaire.setNom(rsUtilisateur.getString("nom"));
+			stagiaire.setNom(rsUtilisateur.getString("prenom"));
+			stagiaire.setNom(rsUtilisateur.getString("email"));
+			stagiaire.setNom(rsUtilisateur.getString("motDePasseSHA"));
+		}
+		PreparedStatement psStagiaire = connexion.prepareStatement(Requetes.STAGIAIRE_PAR_ID);
+		psStagiaire.setLong(1, id);
+		ResultSet rsStagiaire = psStagiaire.executeQuery();
+		if (rsStagiaire.next()) {
+			stagiaire.setIdUtilisateur(rsStagiaire.getLong("id"));
+			stagiaire.setDateNaissance(rsStagiaire.getTimestamp("dateDeNaissance"));
+			stagiaire.setNumPoleEmploi(rsStagiaire.getString("numPolEmploi"));
+			stagiaire.setEstHandicape(rsStagiaire.getBoolean("estHandicape"));
 		}
 		return stagiaire;
 	}
@@ -68,25 +85,26 @@ public class StagiaireDaoImpl implements StagiaireDao {
 	// FROM stagiaire";
 	public List<Stagiaire> findAll() throws SQLException {
 		List<Stagiaire> stagiaires = new ArrayList<Stagiaire>();
-		PreparedStatement ps = connexion.prepareStatement(Requetes.TOUS_LES_STAGIAIRES);
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			stagiaires.add(findOne(rs.getLong("id")));
+		Stagiaire stagiaire = null;
+		PreparedStatement psUtilisateur = connexion.prepareStatement(Requetes.UTILISATEUR_PAR_ID);
+		ResultSet rsUtilisateur = psUtilisateur.executeQuery();
+		while (rsUtilisateur.next()) {
+			stagiaire = new Stagiaire();
+			stagiaire.setNom(rsUtilisateur.getString("nom"));
+			stagiaire.setNom(rsUtilisateur.getString("prenom"));
+			stagiaire.setNom(rsUtilisateur.getString("email"));
+			stagiaire.setNom(rsUtilisateur.getString("motDePasseSHA"));
+		}
+		PreparedStatement psStagiaire = connexion.prepareStatement(Requetes.STAGIAIRE_PAR_ID);
+		ResultSet rsStagiaire = psStagiaire.executeQuery();
+		while (rsStagiaire.next()) {
+			stagiaire.setIdUtilisateur(rsStagiaire.getLong("id"));
+			stagiaire.setDateNaissance(rsStagiaire.getTimestamp("dateDeNaissance"));
+			stagiaire.setNumPoleEmploi(rsStagiaire.getString("numPolEmploi"));
+			stagiaire.setEstHandicape(rsStagiaire.getBoolean("estHandicape"));
+			stagiaires.add(stagiaire);
 		}
 		return stagiaires;
-	}
-
-	// "DELETE FROM stagiaire WHERE id=?";
-	public boolean delete(Long id) throws SQLException {
-		Stagiaire stagiaire = findOne(id);
-		boolean estEfface = false;
-		if (stagiaire != null) {
-			PreparedStatement ps = connexion.prepareStatement(Requetes.SUPPRESSION_STAGIAIRE);
-			ps.setLong(1, id);
-			ps.executeUpdate();
-			estEfface = true;
-		}
-		return estEfface;
 	}
 
 }

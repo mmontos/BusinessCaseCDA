@@ -1,5 +1,6 @@
 package fr.humanbooster.fx.test_technique;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import fr.humanbooster.fx.test_technique.business.Administrateur;
@@ -18,15 +19,25 @@ import fr.humanbooster.fx.test_technique.business.Repondre;
 import fr.humanbooster.fx.test_technique.business.Reponse;
 import fr.humanbooster.fx.test_technique.business.Session;
 import fr.humanbooster.fx.test_technique.business.Stagiaire;
+import fr.humanbooster.fx.test_technique.dao.StagiaireDao;
+import fr.humanbooster.fx.test_technique.dao.impl.StagiaireDaoImpl;
 
 public class App {
+	
+	private static StagiaireDao stagiaireDao = new StagiaireDaoImpl();
 
 	public static void main(String[] args) {
 		Administrateur administrateur = new Administrateur(1l, "nom", "prénom", "email", "mot de passe");
 		Bareme bareme = new Bareme();
 		ChefDeProjet chefDeProjet = new ChefDeProjet(1l, "nom", "prénom", "email", "mot de passe", new Date());
-		Stagiaire stagiaire = new Stagiaire(1l, "nom", "prénom", "email", "mot de passe", new Date(), "numéro PE",
+		Stagiaire stagiaire = new Stagiaire("nom", "prénom", "email", "mot de passe", new Date(), "numéro PE",
 				false);
+		
+		try {
+			stagiaireDao.create(stagiaire);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		Domaine domaine = new Domaine(1l, "nom");
 		Enseignant enseignant = new Enseignant(1l, "nom", "prénom");
 		Formation formation = new Formation(1l, "intitulé", "déscription");
