@@ -12,6 +12,7 @@ import fr.humanbooster.fx.test_technique.business.Domaine;
 import fr.humanbooster.fx.test_technique.business.Niveau;
 import fr.humanbooster.fx.test_technique.business.Question;
 import fr.humanbooster.fx.test_technique.business.Questionnaire;
+import fr.humanbooster.fx.test_technique.dao.AdministrateurDao;
 import fr.humanbooster.fx.test_technique.dao.ConnexionBdd;
 import fr.humanbooster.fx.test_technique.dao.DomaineDao;
 import fr.humanbooster.fx.test_technique.dao.NiveauDao;
@@ -108,6 +109,13 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Override
 	public List<Question> findByQuestionnaire(Questionnaire questionnaire) throws SQLException {
 		List<Question> questions = new ArrayList<>();
+<<<<<<< HEAD
+		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTION_PAR_idQUESTIONNAIRE);
+		ps.setLong(1, questionnaire.getIdQuestionnaire());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			questions.add(findOne(rs.getLong("idQUESTION")));
+=======
 		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTIONS_PAR_QUESTIONNAIRE);
 		ps.setLong(1, questionnaire.getIdQuestionnaire());
 		ResultSet rs = ps.executeQuery();
@@ -123,6 +131,7 @@ public class QuestionDaoImpl implements QuestionDao {
 			question.setQuestionnaire(questionnaireDao.findOne(rs.getLong("idQUESTIONNAIRE")));
 			question.setAdministrateur(administrateurDao.findOne(rs.getLong("idADMINISTRATEUR")));
 			questions.add(question);
+>>>>>>> b386f8659bd7928ec7b1ab4de2109e40b70613d7
 		}
 		return questions;
 	}
@@ -130,6 +139,13 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Override
 	public List<Question> findByDomaine(Domaine domaine) throws SQLException {
 		List<Question> questions = new ArrayList<>();
+<<<<<<< HEAD
+		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTION_PAR_idDOMAINE);
+		ps.setLong(1, domaine.getIdDomaine());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			questions.add(findOne(rs.getLong("idQUESTION")));
+=======
 		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTIONS_PAR_DOMAINE);
 		ps.setLong(1, domaine.getIdDomaine());
 		ResultSet rs = ps.executeQuery();
@@ -145,6 +161,7 @@ public class QuestionDaoImpl implements QuestionDao {
 			question.setQuestionnaire(questionnaireDao.findOne(rs.getLong("idQUESTIONNAIRE")));
 			question.setAdministrateur(administrateurDao.findOne(rs.getLong("idADMINISTRATEUR")));
 			questions.add(question);
+>>>>>>> b386f8659bd7928ec7b1ab4de2109e40b70613d7
 		}
 		return questions;
 	}
@@ -152,6 +169,13 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Override
 	public List<Question> findByNiveau(Niveau niveau) throws SQLException {
 		List<Question> questions = new ArrayList<>();
+<<<<<<< HEAD
+		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTION_PAR_idNIVEAU);
+		ps.setLong(1, niveau.getIdNiveau());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			questions.add(findOne(rs.getLong("idQUESTION")));
+=======
 		PreparedStatement ps = connexion.prepareStatement(Requetes.QUESTIONS_PAR_NIVEAU);
 		ps.setLong(1, niveau.getIdNiveau());
 		ResultSet rs = ps.executeQuery();
@@ -167,10 +191,14 @@ public class QuestionDaoImpl implements QuestionDao {
 			question.setQuestionnaire(questionnaireDao.findOne(rs.getLong("idQUESTIONNAIRE")));
 			question.setAdministrateur(administrateurDao.findOne(rs.getLong("idADMINISTRATEUR")));
 			questions.add(question);
+>>>>>>> b386f8659bd7928ec7b1ab4de2109e40b70613d7
 		}
 		return questions;
 	}
 
+	// UPDATE question SET enonce=?, lienMedia=?, estChoixMultiples=?,
+	// estEliminatoire=?, idUTILISATEUR=?, idQUESTIONNAIRE=?, idDOMAINE=?,
+	// idNIVEAU=? WHERE idQUESTION=?
 	@Override
 	public Question update(Question question) throws SQLException {
 		PreparedStatement ps = connexion.prepareStatement(Requetes.UPDATE_QUESTION);
@@ -178,6 +206,17 @@ public class QuestionDaoImpl implements QuestionDao {
 		ps.setString(2, question.getLienMedia());
 		ps.setBoolean(3, question.isEstChoixMultiples());
 		ps.setBoolean(4, question.isEstElminatoire());
+<<<<<<< HEAD
+		ps.setLong(5, question.getAdministrateur().getIdUtilisateur());
+		ps.setLong(6, question.getQuestionnaire().getIdQuestionnaire());
+		ps.setLong(7, question.getDomaine().getIdDomaine());
+		ps.setLong(8, question.getNiveau().getIdNiveau());
+
+		ps.setLong(9, question.getIdQuestion());
+
+		ps.executeUpdate();
+		return findOne(question.getIdQuestion());
+=======
 		ps.setLong(5, question.getNiveau().getIdNiveau());
 		ps.setLong(6, question.getDomaine().getIdDomaine());
 		ps.setLong(7, question.getQuestionnaire().getIdQuestionnaire());
@@ -185,10 +224,22 @@ public class QuestionDaoImpl implements QuestionDao {
 		ps.setLong(9, question.getIdQuestion());
 		ps.executeUpdate();
 		return question;
+>>>>>>> b386f8659bd7928ec7b1ab4de2109e40b70613d7
 	}
 
 	@Override
 	public boolean delete(Long id) throws SQLException {
+<<<<<<< HEAD
+		Question question = findOne(id);
+		boolean estEfface = false;
+		if (question != null) {
+			PreparedStatement ps = connexion.prepareStatement(Requetes.SUPPRESSION_QUESTION);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			estEfface = true;
+		}
+		return estEfface;
+=======
 		if (findOne(id) == null) {
 			return false;
 			}
@@ -201,6 +252,7 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Override
 	protected void finalize() throws Throwable {
 		connexion.close();
+>>>>>>> b386f8659bd7928ec7b1ab4de2109e40b70613d7
 	}
 
 }

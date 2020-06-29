@@ -30,6 +30,7 @@ public class NiveauDaoImpl implements NiveauDao {
 	}
 
 	@Override
+	// "INSERT INTO Niveau (nom) VALUES (?)"
 	public Niveau create(Niveau niveau) throws SQLException {
 		PreparedStatement ps = connexion.prepareStatement(Requetes.AJOUT_NIVEAU, Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, niveau.getNom());
@@ -41,6 +42,7 @@ public class NiveauDaoImpl implements NiveauDao {
 	}
 
 	@Override
+	// SELECT idNIVEAU, nom FROM Niveau WHERE idNIVEAU=?
 	public Niveau findOne(Long id) throws SQLException {
 		Niveau niveau = null;
 		PreparedStatement ps = connexion.prepareStatement(Requetes.NIVEAU_PAR_ID);
@@ -54,6 +56,7 @@ public class NiveauDaoImpl implements NiveauDao {
 	}
 
 	@Override
+	// SELECT idNIVEAU, nom FROM Niveau
 	public List<Niveau> findAll() throws SQLException {
 		List<Niveau> niveaux = new ArrayList<>();
 		PreparedStatement ps = connexion.prepareStatement(Requetes.TOUS_LES_NIVEAUX);
@@ -67,16 +70,17 @@ public class NiveauDaoImpl implements NiveauDao {
 	}
 
 	@Override
+	// UPDATE Niveau SET nom=? WHERE idNIVEAU=?
 	public Niveau update(Niveau niveau) throws SQLException {
 		PreparedStatement ps = connexion.prepareStatement(Requetes.MODIFICATION_NIVEAU);
 		ps.setString(1, niveau.getNom());
-
 		ps.setLong(2, niveau.getIdNiveau());
 		ps.executeUpdate();
 		return niveau;
 	}
 
 	@Override
+	// DELETE FROM Niveau WHERE idNIVEAU=?
 	public boolean delete(Long idNiveau) throws SQLException {
 		if (findOne(idNiveau) == null)
 			return false;
