@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.humanbooster.fx.autoroute.business.Tarif;
-import fr.humanbooster.fx.test_technique.business.Administrateur;
 import fr.humanbooster.fx.test_technique.business.Domaine;
 import fr.humanbooster.fx.test_technique.business.Niveau;
 import fr.humanbooster.fx.test_technique.business.Question;
@@ -18,6 +16,7 @@ import fr.humanbooster.fx.test_technique.dao.ConnexionBdd;
 import fr.humanbooster.fx.test_technique.dao.DomaineDao;
 import fr.humanbooster.fx.test_technique.dao.NiveauDao;
 import fr.humanbooster.fx.test_technique.dao.QuestionDao;
+import fr.humanbooster.fx.test_technique.dao.QuestionnaireDao;
 import fr.humanbooster.fx.test_technique.dao.Requetes;
 
 public class QuestionDaoImpl implements QuestionDao {
