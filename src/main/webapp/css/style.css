@@ -1,0 +1,49 @@
+@import 'componants/header.css';
+@import 'componants/footer.css';
+@import 'componants/navHeader.css';
+@import 'componants/filArianne.css';
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main{
+	flex:1;
+}
+
+.container {
+    max-width: 1060px;
+    margin: auto;
+}
+
+.container-main {
+    max-width: 970px;
+    margin: 20px auto 20px auto;
+
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-space-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+nav ul li a {
+    display: block;
+    height: 100%;
+    padding: 10px;
+}
+
+header a, header a:hover, footer a:hover, .fil-arianne a:hover{
+	text-decoration:underline;
+}
+

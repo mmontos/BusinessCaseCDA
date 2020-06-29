@@ -1,0 +1,70 @@
+
+/*--------- Nav header ---------*/
+nav#nav-header {
+    background-color: #484848;
+    border-radius: 0 0 13px 13px;
+    box-shadow: 0px 3px 4px #b3b3b3;
+    width: 100%
+}
+
+nav#nav-header ul {
+    margin: 0;
+    color: white;
+    position: relative;
+}
+
+nav#nav-header ul li {
+    border-right: 1px rgb(112, 112, 112) solid;
+    text-align: center;
+    width: 100%;
+}
+
+nav#nav-header ul li:hover {
+    background-color: #5f5f5f;
+}
+
+nav#nav-header ul li:first-child {
+    border-radius: 0 0 0 13px;
+}
+
+nav#nav-header ul li:last-child {
+    border-right: 1px #484848 solid;
+    border-radius: 0 0 13px 0;
+}
+
+nav#nav-header ul li:last-child:hover{
+    border-radius: 0;
+    transition: 0s;
+}
+
+/*--------- Sous nav header ---------*/
+
+nav#nav-header ul li ul {
+    display: none;
+    width: 25%;
+}
+
+nav#nav-header ul li:hover ul {
+    z-index: 99999;
+    position: absolute;
+    display: block;
+    background-color: #484848;
+    box-shadow: 0px 3px 4px #b3b3b3;
+    border-radius: 0 0 13px 13px;
+}
+
+nav#nav-header ul li ul li {
+    border: none;
+}
+
+nav#nav-header ul li ul li:hover {
+    border-radius: 0;
+}
+
+nav#nav-header ul li ul li:last-child {
+    border-radius: 0 0 13px 13px;
+}
+
+nav#nav-header ul li ul li:last-child:hover {
+    border-radius: 0 0 13px 13px;
+}

@@ -1,0 +1,22 @@
+
+/*--------- Fil arianne ---------*/
+nav.fil-arianne ul{
+    border: 1px solid black;
+    border-radius: 10px;
+    width: max-content;
+    font-size:12px;
+}
+
+nav.fil-arianne li+li:before {
+  padding: 8px 0;
+  color: black;
+  content: "/\00a0";
+}
+
+footer nav.fil-arianne ul{
+    border: 1px solid white;
+}
+
+footer nav.fil-arianne li+li:before {
+	color: white;
+}
